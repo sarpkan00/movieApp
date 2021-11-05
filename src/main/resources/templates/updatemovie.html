@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      layout:decorate="~{fragments/layout.html}">
+<head>
+ <meta charset="utf-8" />
+    <title>Movie Collection App</title>
+    <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	th:integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	th:crossorigin="anonymous">
+</head>
+<body>
+
+<div layout:fragment="content" th:remove="tag">
+<div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Edit Movie</h3>
+        </div>
+        <div class="panel-body">
+            <form th:object="${movie}" th:action="@{/save}" action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="hidden" class="form-control" id="id" th:field="*{id}"/>
+                    <input type="text" class="form-control" id="name" th:field="*{name}" placeholder="Name"/>
+                </div>
+                <div class="form-group">
+                    <label>Genre</label>
+                    <select class="form-control" th:field="*{genre}" style="width: 145px">
+                        <option value="" >Select Genre</option>
+                        <option th:each="genre : ${genres}"
+                                th:value="${genre.genreName}"
+                                th:text="${genre.genreName}">
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="year">Quantity</label>
+                    <input type="text" class="form-control" id="year" th:field="*{realeseYear}"
+                           placeholder="Year"/>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" class="form-control" id="description" th:field="*{description}"
+                           placeholder="Description"/>
+                </div>
+                <div class="form-group">
+                    <label for="media">Media</label>
+                    <input type="text" class="form-control" id="media" th:field="*{media}"
+                           placeholder="Media"/>
+                </div>
+                <div class="form-group">
+                    <label>Language</label>
+                    <select class="form-control" th:field="*{language}" style="width: 145px">
+                        <option value="">Select Language</option>
+                        <option th:each="language : ${languages}"
+                                th:value="${language.name}"
+                                th:text="${language.name}">
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">   
+                <button type="submit" class="btn btn-primary" value="save">Kaydet</button>
+                <a class="btn btn-danger" th:href="@{/movies}">Vazgeç</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+
+</div>  
+</body>
+</html>
