@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -54,14 +53,22 @@ public class Movie {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date realeseYear;
 	
-	@OneToMany(mappedBy = "movie")
-	private Set<Genre> genre;
+	@ManyToMany
+	@JoinTable(name = "movie_genre", joinColumns = @JoinColumn(name = "movie_id"), 
+	inverseJoinColumns = @JoinColumn(name = "language_id"))
+	private List<Genre> genres;
 	
-	@OneToMany(mappedBy = "movie")
-	private Set<Language> language;
+	@ManyToMany
+	@JoinTable(name = "movie_language", joinColumns = @JoinColumn(name = "movie_id"), 
+	inverseJoinColumns = @JoinColumn(name = "language_id"))
+	private List<Language> languages;
 	
 	@ManyToMany
 	@JoinTable(name = "movie_actor", joinColumns = @JoinColumn(name = "movie_id"),
 					inverseJoinColumns = @JoinColumn(name = "actor_id"))
-	private List<Actor> actor;
+	private List<Actor> actors;
+
+	
+
+
 }

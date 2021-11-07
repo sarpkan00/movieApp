@@ -23,6 +23,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "actors")
 public class Actor {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -36,7 +37,9 @@ public class Actor {
 	@Column(name = "actor_role",nullable = false, length = 20)
 	private String actorRole;
 	
-	@ManyToMany(mappedBy = "actor")
+	@ManyToMany(mappedBy = "actors")
 	List<Movie> movies;
+
+	
 
 }

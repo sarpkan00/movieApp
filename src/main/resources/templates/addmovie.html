@@ -26,7 +26,7 @@
                 </div>
                  <div class="form-group">
                     <label>Aktör Seçenekleri</label>
-                        <select class="form-control" th:field="*{actor}" style="width: 145px">
+                        <select class="form-control" th:field="*{actors}" style="width: 145px">
                         <option value="">Aktör</option>
                         <option th:each="actor : ${actors}"
                                 th:value="${actor.id}"
@@ -37,7 +37,7 @@
                 
                 <div class="form-group">
                     <label>Tür Seçenekleri</label>
-                        <select class="form-control" th:field="*{genre}" style="width: 145px">
+                        <select class="form-control" th:field="*{genres}" style="width: 145px">
                         <option value="">Tür Seçiniz</option>
                         <option th:each="genre : ${genres}"
                                 th:value="${genre.id}"
@@ -62,7 +62,7 @@
                 </div>
                 <div class="form-group">
                     <label>Dil Seçenekleri</label>
-                    <select class="form-control" th:field="*{language}" style="width: 145px">
+                    <select class="form-control" th:field="*{languages}" style="width: 145px">
                         <option value="">Dil Seçiniz</option>
                         <option th:each="language : ${languages}"
                                 th:value="${language.id}"
