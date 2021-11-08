@@ -1,6 +1,7 @@
 package com.sarpkansavaskan.movieApp.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -53,20 +54,11 @@ public class MovieController {
 	@GetMapping
 	public String Page(Model model) {
 		List<Movie> movies = movieService.getAll();
-		for(Movie movie : movies) {
-			movie.toString();
-		}
+		System.out.println(movies);
 		model.addAttribute("movie", movies);
-		
-		
 		return "movies";
 	}
 	
-	@GetMapping("/a")
-	public String abc() {
-		
-		return "aaa";
-	}
 
 	@GetMapping("/add")
 	public String addMovie(@Valid Model model) {
@@ -78,24 +70,27 @@ public class MovieController {
 		return "addmovie";
 	}
 	
+	@GetMapping("/update/{id}")
+	public String updateMovie(@PathVariable("id") int id, Model model) {
+		Movie movie = movieService.getById(id); 
+		List<Genre> genres = genreService.getAllGenre();
+		List<Language> languages = languageService.getAll();
+		String actors = actorService.getAll().stream().map(p -> 
+		p.getActorName()).collect(Collectors.joining(",")); 
+		model.addAttribute("movie", movie);
+		model.addAttribute("actors",actors);
+		model.addAttribute("genres", genres);
+		model.addAttribute("languages", languages);
+		return "updatemovie";
+	}
+	
 	@PostMapping("/save")
 	public String save( Movie movie) {
 		movieService.save(movie);
 		return "redirect:/movies";
 	}
 
-	@GetMapping("/update/{id}")
-	public String updateMovie(@PathVariable("id") int id, Model model) {
-		Movie movie = movieService.getById(id);
-		List<Actor> actors = actorService.getAll();
-		List<Genre> genres = genreService.getAllGenre();
-		List<Language> languages = languageService.getAll();
-		model.addAttribute("movie", movie);
-		model.addAttribute("actors", actors);
-		model.addAttribute("genres", genres);
-		model.addAttribute("languages", languages);
-		return "updatemovie";
-	}
+	
 
 	public String deleteMovie(@PathVariable("id") int id) {
 		movieService.delete(id);

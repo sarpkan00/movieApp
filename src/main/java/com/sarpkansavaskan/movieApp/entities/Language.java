@@ -35,6 +35,11 @@ public class Language {
 	@ManyToMany(mappedBy = "languages")
 	private Set<Movie> movie;
 
+	@Override
+	public String toString() {
+		return name.toUpperCase();
+	}
+
 
 
 }

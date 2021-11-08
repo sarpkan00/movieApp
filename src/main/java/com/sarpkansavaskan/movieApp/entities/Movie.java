@@ -55,7 +55,7 @@ public class Movie {
 	
 	@ManyToMany
 	@JoinTable(name = "movie_genre", joinColumns = @JoinColumn(name = "movie_id"), 
-	inverseJoinColumns = @JoinColumn(name = "language_id"))
+	inverseJoinColumns = @JoinColumn(name = "genre_id"))
 	private List<Genre> genres;
 	
 	@ManyToMany
@@ -68,7 +68,14 @@ public class Movie {
 					inverseJoinColumns = @JoinColumn(name = "actor_id"))
 	private List<Actor> actors;
 
-	
+	@Override
+	public String toString() {
+		return "Movie [id=" + id + ", name=" + name + ", description=" + description + ", media=" + media
+				+ ", realeseYear=" + realeseYear + ", genres=" + genres + ", languages=" + languages + ", actors="
+				+ actors + "]";
+	}
 
+	
+	
 
 }

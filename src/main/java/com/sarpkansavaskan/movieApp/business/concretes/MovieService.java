@@ -45,7 +45,7 @@ public class MovieService {
 				.collect(Collectors.toList()));
 		movie.setActors(actors);
 		
-		List<Genre> genres = genreDao.findByGenreNameIn(movie.getGenres().stream().map(Genre::getGenreName)
+		List<Genre> genres =genreDao.findByGenreNameIn(movie.getGenres().stream().map(Genre::getGenreName)
 				.collect(Collectors.toList()));
 		movie.setGenres(genres);
 		

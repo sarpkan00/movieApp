@@ -74,12 +74,16 @@
 			
 						<tr th:each="movie : ${movie}" id="movies" class="success">
 							<td class="movie" th:text="${movie.name}"></td>
-							<td th:text="${movie.genres}"></td>
+							<td><span th:each="genre : ${movie.genres}" th:text="${genre.genreName}"/></span>
+							
+
 							<td th:text="${movie.description}"></td>
 							<td th:text="${movie.realeseYear}"></td>
 							<td th:text="${movie.media}"></td>
-							<td th:text="${movie.languages}"></td>
-							<td th:text="${movie.actors}"></td>
+<!-- 							<td><span th:each="language : ${movie.languages}" th:text="${language.name}"/></span> -->
+							 <td th:text="${movie.languages.name}"></td>
+							<td><span th:each="actor : ${movie.actors}" th:text="${actor.actorName}"/></span>
+							
 							<td><a th:href="@{movies/delete/{id}(id=${movie.id})}"
 								class="btn btn-danger">Delete</a> <a
 								th:href="@{movies/edit/{id}(id=${movie.id})}"

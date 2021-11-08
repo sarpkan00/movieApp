@@ -23,7 +23,8 @@ import lombok.Setter;
 @Entity
 @Table(name = "actors")
 public class Actor {
-	
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -40,6 +41,9 @@ public class Actor {
 	@ManyToMany(mappedBy = "actors")
 	List<Movie> movies;
 
-	
+	@Override
+	public String toString() {
+		return actorName;
+	}
 
 }
