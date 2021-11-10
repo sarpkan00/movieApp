@@ -18,6 +18,19 @@ public class LanguageService {
 		this.languageDao = languageDao;
 	}
 	
+	public Language save(Language language) {
+		return languageDao.save(language);
+		
+	}
+
+	public void delete(int id) {
+		languageDao.deleteById(id);
+	}
+	
+	public Language getById(int id) {
+		return languageDao.getById(id);
+	}
+	
 	
 	public List<Language> getAll() {
 		return languageDao.findAll();

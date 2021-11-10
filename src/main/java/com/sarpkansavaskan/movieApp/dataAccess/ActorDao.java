@@ -9,8 +9,8 @@ import com.sarpkansavaskan.movieApp.entities.Actor;
 
 @Repository
 public interface ActorDao extends JpaRepository<Actor, Integer> {
-	
+
 	List<Actor> findByActorNameIn(List<String> actorName);
-	
-	List<Actor> findByMovies_Id(int id);
-} 
+
+//	Actor getById(int id);
+}

@@ -12,6 +12,6 @@ public interface GenreDao extends JpaRepository<Genre, Integer>{
 	
 	List<Genre> findByGenreNameIn(List<String> genreName);
 	
-	List<Genre> findAllByMovie_Id(int id);
+	
 	
 }

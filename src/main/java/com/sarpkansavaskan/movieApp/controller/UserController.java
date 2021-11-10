@@ -12,49 +12,58 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.sarpkansavaskan.movieApp.business.abstracts.UserService;
+import com.sarpkansavaskan.movieApp.business.concretes.UserManager;
+import com.sarpkansavaskan.movieApp.entities.Actor;
 import com.sarpkansavaskan.movieApp.entities.User;
 import com.sarpkansavaskan.movieApp.entities.dtos.UserDto;
 
 @Controller
 public class UserController {
 
-	private final UserService userService;
+	private final UserManager userManager;
 
 	@Autowired
-	public UserController(UserService userService) {
+	public UserController(UserManager userManager) {
 		super();
-		this.userService = userService;
+		this.userManager = userManager;
 	}
 
 	@GetMapping("/login")
 	public String login() {
-		return "login";
+		return "user/login";
 	}
 	
 	@PostMapping("/login")
 	public String loginCheck(BindingResult bindingResult) {
-		return "login";
+		return "user/login";
 	}
 	
-	@GetMapping("/register")
-	public String register() {
-		return "register";
-	}
+	@PostMapping("/save")
+	 public String save(UserDto userDto) {
+		userManager.save(userDto);
+	        return "redirect:/login";
+	    }
+	 
+		@GetMapping("/register")
+		public String addUser(Model model) {
+			model.addAttribute("User", new UserDto());
+			return "user/register";
+		}
 	
 	@PostMapping("/register")
 	public String loginUserAccount(@ModelAttribute("user") @Valid UserDto userDto,
 									BindingResult bindingResult,Model model) {
-		User user1 = userService.FindByUserName(userDto.getUsername());
+		User user1 = userManager.FindByUserName(userDto.getUsername());
 		
 		if(user1 != null) {
 			bindingResult.reject("username", null, "Bu kullanıcı adı mevcut!!" );
 		}
 		
 		if(bindingResult.hasErrors()) {
-			return "login";
+			return "user/login";
 		}
 		
-		userService.save(userDto);
+		userManager.save(userDto);
 		
 		return "redirect:/login?success";
 		

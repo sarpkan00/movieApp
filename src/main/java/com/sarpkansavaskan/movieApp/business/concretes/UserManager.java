@@ -49,6 +49,7 @@ public class UserManager implements UserService {
 	@Override
 	public User save(UserDto userDto) {
 		User user = new User();
+		user.setFullName(userDto.getFullName());
 		user.setUsername(userDto.getUsername());
 		user.setPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
 		user.setRoles(Arrays.asList(new Role("ROLE_USER")));

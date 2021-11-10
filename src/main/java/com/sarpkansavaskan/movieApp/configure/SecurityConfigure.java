@@ -30,36 +30,36 @@ public class SecurityConfigure extends WebSecurityConfigurerAdapter {
 		
 	}
 	
-	@Override
-	protected void configure(final HttpSecurity http) throws Exception {
-		http.formLogin().loginPage("/login.html");
-			
-
-	}
-
 //	@Override
 //	protected void configure(final HttpSecurity http) throws Exception {
-//		http.authorizeRequests()
-//				.antMatchers(
-//						"/", 
-//						"/login", 
-//						"/register", 
-//						"/js/**", 
-//						"/css/**", 
-//						"/img/**", 
-//						"/webjars/**").permitAll()
-//				.antMatchers("/movies/delete/**, /movies/update/**")
-//				.hasAuthority("ROLE_ADMIN")
-//				.anyRequest().authenticated().and()
-//				.formLogin().loginPage("/login")
-//				.defaultSuccessUrl("/movies").permitAll().
-//				and()
-//				.logout().permitAll()
-//				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//				.logoutSuccessUrl("/login?logout").and()
-//				.exceptionHandling();
+//		http.formLogin().loginPage("/login.html");
+//			
 //
 //	}
+
+	@Override
+	protected void configure(final HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+				.antMatchers(
+						"/", 
+						"/login", 
+						"/register", 
+						"/js/**", 
+						"/css/**", 
+						"/img/**", 
+						"/webjars/**").permitAll()
+				.antMatchers("/movies/delete/**" ,"/movies/update/**")
+				.hasAnyAuthority("ROLE_ADMIN")
+				.anyRequest().authenticated().and()
+				.formLogin().loginPage("/login")
+				.defaultSuccessUrl("/movies").permitAll().
+				and()
+				.logout().permitAll()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/login?logout").and()
+				.exceptionHandling();
+
+	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {

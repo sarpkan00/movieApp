@@ -68,6 +68,7 @@ public class Movie {
 					inverseJoinColumns = @JoinColumn(name = "actor_id"))
 	private List<Actor> actors;
 
+	
 	@Override
 	public String toString() {
 		return "Movie [id=" + id + ", name=" + name + ", description=" + description + ", media=" + media

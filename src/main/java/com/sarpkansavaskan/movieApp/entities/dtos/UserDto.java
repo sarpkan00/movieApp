@@ -12,7 +12,9 @@ import lombok.Setter;
 @Setter
 @FieldMatchUp(first = "password", second = "confirmPassword", message = "Alanlar Eşleşmelidir!!")
 public class UserDto {
-
+	
+	@NotEmpty
+	private String fullName;
     @NotEmpty
     private String username;
 

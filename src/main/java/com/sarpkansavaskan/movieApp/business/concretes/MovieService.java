@@ -40,7 +40,6 @@ public class MovieService {
 
 	
 	public void save(Movie movie) {
-		
 		List<Actor> actors = actorDao.findByActorNameIn(movie.getActors().stream().map(Actor::getActorName)
 				.collect(Collectors.toList()));
 		movie.setActors(actors);
@@ -95,7 +94,6 @@ public class MovieService {
 			Pageable pageable = PageRequest.of(pageNo, pageSize,sort);
 		return movieDao.findAll(pageable);
 	}
-
 
 	public List<Movie> getAll() {
 		return movieDao.findAll();

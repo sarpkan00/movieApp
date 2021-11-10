@@ -18,12 +18,44 @@
                     <i class="fa fa-key" aria-hidden="true"></i>
                 </div>
                 <div class="col-lg-12 login-title">
-                   	KAYIT PANELİ
+                    KAYIT PANELİ
+                    
+                                <p class="error-message"
+                                   th:if="${#fields.hasGlobalErrors()}"
+                                   th:each="error : ${#fields.errors('global')}"
+                                   th:text="${error}">Validation error</p>
+                                
+                                </div>
+
+                                <div class="form-group"
+                                     th:classappend="${#fields.hasErrors('password')}? 'has-error':''">
+                                    <input id="password" placeholder="Password"
+                                           class="form-control"
+                                           type="password"
+                                           th:field="*{password}"/>
+                                    <p class="alert alert-danger"
+                                       th:each="error : ${#field.errors('password')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                                <div class="form-group"
+                                     th:classappend="${#field.hasErrors('confirmPassword')}? 'has-error':''">
+                                    <input id="confirmPassword" placeholder="Confirm password"
+                                           class="form-control"
+                                           type="password"
+                                           th:field="*{confirmPassword}"/>
+                                    <p class="alert alert-danger"
+                                       th:each="error : ${#fields.errors('confirmPassword')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
                 </div>
 
                 <div class="col-lg-12 login-form">
                     <div class="col-lg-12 login-form">
                         <form id="register-form" method="post" th:action="@{/register}" role="form">
+                        <div class="form-group">
+                                    <input type="text" name="fullName" id="fullName" tabindex="1" class="form-control"
+                                           placeholder=" Adı">
+                                </div>
                             <div class="form-group">
                                     <input type="text" name="username" id="username" tabindex="1" class="form-control"
                                            placeholder="Kullanıcı Adı">
@@ -31,6 +63,10 @@
                                 <div class="form-group">
                                     <input type="password" name="password" id="password" tabindex="2"
                                            class="form-control" placeholder="Şifre">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="confirmPassword" id="confirmPassword" tabindex="2"
+                                           class="form-control" placeholder="Şifre Tekrar">
                                 </div>
 
                             <div class="col-lg-12 loginbttm">
@@ -48,7 +84,7 @@
                             </div>
                         </form>
                          <form method="get" th:action="@{/login}" role="form">
-                         <input type="submit" onclick = "location.href='login.html'" tabindex="4"
+                         <input type="submit" tabindex="4"
                                            class="form-control btn btn-login" value="Giriş Yap">
                          </form>
                     </div>
